@@ -33,6 +33,14 @@ class bitstring {
         System.out.println(Value());
     }
 
+    public int smod(int value, int max) {
+        if (value >= max) return value % max;
+        return value;
+    }
+    public int smod(int value) {
+        return smod(value, bits.length);
+    }
+
     public String NOT() {
         boolean[] nb = new boolean[bits.length];
         for (int i = 0; i < nb.length; i ++) {
@@ -47,6 +55,31 @@ class bitstring {
         for (int i = 0; i < nb.length; i ++) {
             if (i + mod < bits.length) nb[i] = bits[i + mod];
             else nb[i] = false;
+        }
+        bits = nb;
+        return Value();
+    }
+    public String RSHIFT(int mod) {
+        boolean[] nb = new boolean[bits.length];
+        for (int i = 0; i < nb.length; i ++) {
+            if (i - mod >= 0) nb[i] = bits[i - mod];
+            else nb[i] = false;
+        }
+        bits = nb;
+        return Value();
+    }
+    public String RCIRC(int mod) {
+        boolean[] nb = new boolean[bits.length];
+        for (int i = 0; i < nb.length; i ++) {
+            nb[i] = bits[smod(i + (bits.length - mod))];
+        }
+        bits = nb;
+        return Value();
+    }
+    public String LCIRC(int mod) {
+        boolean[] nb = new boolean[bits.length];
+        for (int i = 0; i < nb.length; i ++) {
+            nb[i] = bits[smod(i + mod)];
         }
         bits = nb;
         return Value();
@@ -67,6 +100,13 @@ class bst_main {
         btst.NOT();
         btst.print();
         btst.LSHIFT(1);
+        btst.print();
+        btst.RSHIFT(4);
+        btst.print();
+        btst.RCIRC(1);
+        btst.print();
+
+        btst.LCIRC(5);
         btst.print();
     }
 }
