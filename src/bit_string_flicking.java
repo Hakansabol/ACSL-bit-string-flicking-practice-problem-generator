@@ -91,7 +91,7 @@ class bst_utils {
 }
 
 // Execution Class
-class bst_main {
+class bit_string_flicking_main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
 
